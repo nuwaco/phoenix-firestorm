@@ -8,7 +8,7 @@
  border="false"
  chrome="true"
  follows="bottom"
- height="157"
+ height="257"
  layout="topleft"
  name="presets_pulldown"
  width="225">
@@ -29,7 +29,7 @@
     follows="left|top"
     layout="topleft"
     column_padding="0"
-    height="100"
+    height="200"
     width="215"
     draw_heading="false"
     draw_stripes="false"
@@ -53,17 +53,28 @@
     layout="topleft"
     left="5"
     name="horiz_separator"
-    top_delta="105"
+    top_delta="205"
     width="215" />
   <button
     name="open_prefs_btn"
-    label="Open Graphics Preferences"
-    tool_tip = "Bring up graphics prefs"
+    label="Graphics Preferences"
+    tool_tip="Open graphics preferences"
     top_delta="3"
-    left="15"
+    left="4"
     height="22"
-    width="200">
+    width="132">
     <button.commit_callback
       function="Presets.GoGraphicsPrefs" />
+  </button>
+  <button
+    name="open_autofps_btn"
+    label="Performance"
+    tool_tip="Open performance window"
+    top_delta="0"
+    left_pad="5"
+    height="22"
+    width="80">
+    <button.commit_callback
+      function="Presets.GoAutofpsPrefs" />
   </button>
 </panel>

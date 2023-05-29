@@ -67,12 +67,14 @@
 
 #include "llnotificationsutil.h"	// <FS:Zi> detect and strip empty alpha layers from images on upload
 
-const S32 PREVIEW_BORDER_WIDTH = 2;
-const S32 PREVIEW_RESIZE_HANDLE_SIZE = S32(RESIZE_HANDLE_WIDTH * OO_SQRT2) + PREVIEW_BORDER_WIDTH;
-const S32 PREVIEW_HPAD = PREVIEW_RESIZE_HANDLE_SIZE;
-const S32 PREVIEW_VPAD = -24 + 35;	// yuk, hard coded
-const S32 PREF_BUTTON_HEIGHT = 16 + 7 + 16 + 35;
-const S32 PREVIEW_TEXTURE_HEIGHT = 320;
+// <FS:Zi> Make preview area position to be not hard-coded
+// const S32 PREVIEW_BORDER_WIDTH = 2;
+// const S32 PREVIEW_RESIZE_HANDLE_SIZE = S32(RESIZE_HANDLE_WIDTH * OO_SQRT2) + PREVIEW_BORDER_WIDTH;
+// const S32 PREVIEW_HPAD = PREVIEW_RESIZE_HANDLE_SIZE;
+// const S32 PREVIEW_VPAD = -24 + 35;	// yuk, hard coded
+// const S32 PREF_BUTTON_HEIGHT = 16 + 7 + 16 + 35;
+// const S32 PREVIEW_TEXTURE_HEIGHT = 320;
+// </FS:Zi>
 
 // <FS:Zi> detect and strip empty alpha layers from images on upload
 const U8 ALPHA_EMPTY_THRESHOLD = 253;
@@ -110,13 +112,22 @@ BOOL LLFloaterImagePreview::postBuild()
 	}
 	childSetCommitCallback("clothing_type_combo", onPreviewTypeCommit, this);
 
-	mPreviewRect.set(PREVIEW_HPAD, 
-		PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD,
-		getRect().getWidth() - PREVIEW_HPAD, 
-		PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+	// <FS:Zi> Make preview area position to be not hard-coded
+	// mPreviewRect.set(PREVIEW_HPAD, 
+	// 	PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD,
+	// 	getRect().getWidth() - PREVIEW_HPAD, 
+	// 	PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+	mPreviewRect = getChildView("preview_area")->getRect();
+	// </FS:Zi>
 	mPreviewImageRect.set(0.f, 1.f, 1.f, 0.f);
 
 	getChildView("bad_image_text")->setVisible(FALSE);
+
+	// <FS:PP> FIRE-32944 - Hide some items if texture is invalid
+	LLCheckBoxCtrl* temp_check = getChild<LLCheckBoxCtrl>("temp_check");
+	LLCheckBoxCtrl* lossless_check = getChild<LLCheckBoxCtrl>("lossless_check");
+	LLUICtrl* uploaded_size_text = getChild<LLUICtrl>("uploaded_size_text");
+	// </FS:PP>
 
 	if (mRawImagep.notNull() && gAgent.getRegion() != NULL)
 	{
@@ -137,16 +148,14 @@ BOOL LLFloaterImagePreview::postBuild()
         //}
 		if (mRawImagep->getWidth() * mRawImagep->getHeight () <= LL_IMAGE_REZ_LOSSLESS_CUTOFF * LL_IMAGE_REZ_LOSSLESS_CUTOFF)
 		{
-			LLCheckBoxCtrl* check_box = getChild<LLCheckBoxCtrl>("lossless_check");
-			check_box->setEnabled(TRUE);
-			check_box->setVisible(TRUE);
-			check_box->setControlVariable(gSavedSettings.getControl("LosslessJ2CUpload"));
+			lossless_check->setEnabled(TRUE);
+			lossless_check->setVisible(TRUE);
+			lossless_check->setControlVariable(gSavedSettings.getControl("LosslessJ2CUpload"));
 		}
 		else
 		{
-			LLCheckBoxCtrl* check_box = getChild<LLCheckBoxCtrl>("lossless_check");
-			check_box->setEnabled(FALSE);
-			check_box->setVisible(FALSE);
+			lossless_check->setEnabled(FALSE);
+			lossless_check->setVisible(FALSE);
 		}
 		//</FS:Beq>
 		
@@ -157,8 +166,52 @@ BOOL LLFloaterImagePreview::postBuild()
 		{
 			gSavedSettings.setBOOL("TemporaryUpload", FALSE);
 		}
-		getChild<LLCheckBoxCtrl>("temp_check")->setVisible(enable_temp_uploads);
+		temp_check->setVisible(enable_temp_uploads);
 		// </FS:CR>
+
+		// <FS:Zi> detect and strip empty alpha layers from images on upload
+		getChild<LLUICtrl>("ok_btn")->setCommitCallback(boost::bind(&LLFloaterImagePreview::onBtnUpload, this));
+
+		uploaded_size_text->setTextArg("[X_RES]", llformat("%d", mRawImagep->getWidth()));
+		uploaded_size_text->setTextArg("[Y_RES]", llformat("%d", mRawImagep->getHeight()));
+		uploaded_size_text->setVisible(TRUE);
+
+		mEmptyAlphaCheck = getChild<LLCheckBoxCtrl>("strip_alpha_check");
+
+		if (mRawImagep->getComponents() != 4)
+		{
+			getChild<LLUICtrl>("image_alpha_warning")->setVisible(false);
+			uploaded_size_text->setTextArg("[ALPHA]", getString("no_alpha"));
+			return true;
+		}
+
+		U32 imageBytes = mRawImagep->getWidth() * mRawImagep->getHeight() * 4;
+
+		U32 emptyAlphaCount = 0;
+		U8* data = mRawImagep->getData();
+		for (U32 i = 3; i < imageBytes; i += 4)
+		{
+			if (data[i] > ALPHA_EMPTY_THRESHOLD)
+			{
+				emptyAlphaCount++;
+			}
+		}
+
+		if (emptyAlphaCount > (imageBytes / 4 * ALPHA_EMPTY_THRESHOLD_RATIO))
+		{
+			getChild<LLUICtrl>("image_alpha_warning")->setVisible(true);
+
+			mEmptyAlphaCheck->setCommitCallback(boost::bind(&LLFloaterImagePreview::emptyAlphaCheckboxCallback, this));
+			mEmptyAlphaCheck->setValue(true);
+		}
+		else
+		{
+			getChild<LLUICtrl>("image_alpha_warning")->setVisible(false);
+			mEmptyAlphaCheck->setValue(false);
+		}
+
+		uploaded_size_text->setTextArg("[ALPHA]", getString(mEmptyAlphaCheck->getValue() ? "no_alpha" : "with_alpha"));
+		// </FS:Zi>
 	}
 	else
 	{
@@ -168,6 +221,12 @@ BOOL LLFloaterImagePreview::postBuild()
 		getChildView("clothing_type_combo")->setEnabled(FALSE);
 		getChildView("ok_btn")->setEnabled(FALSE);
 
+		// <FS:PP> FIRE-32944 - Hide some items if texture is invalid
+		uploaded_size_text->setVisible(FALSE);
+		lossless_check->setVisible(FALSE);
+		temp_check->setVisible(FALSE);
+		// </FS:PP>
+
 		if(!mImageLoadError.empty())
 		{
 			getChild<LLUICtrl>("bad_image_text")->setValue(mImageLoadError.c_str());
@@ -176,47 +235,17 @@ BOOL LLFloaterImagePreview::postBuild()
 	
 	// <FS:Zi> detect and strip empty alpha layers from images on upload
 	// getChild<LLUICtrl>("ok_btn")->setCommitCallback(boost::bind(&LLFloaterNameDesc::onBtnOK, this));
-	getChild<LLUICtrl>("ok_btn")->setCommitCallback(boost::bind(&LLFloaterImagePreview::onBtnUpload, this));
-	
-	if (mRawImagep->getComponents() != 4)
-	{
-		return TRUE;
-	}
-
-	U32 imageBytes = mRawImagep->getWidth() * mRawImagep->getHeight() * 4;
-
-	U32 emptyAlphaCount = 0;
-	U8* data = mRawImagep->getData();
-	for (U32 i = 3; i < imageBytes; i += 4)
-	{
-		if (data[i] > ALPHA_EMPTY_THRESHOLD)
-		{
-			emptyAlphaCount++;
-		}
-	}
-
-	mEmptyAlphaCheck = getChild<LLCheckBoxCtrl>("strip_alpha_check");
-
-	if (emptyAlphaCount > (imageBytes / 4 * ALPHA_EMPTY_THRESHOLD_RATIO))
-	{
-		getChild<LLUICtrl>("image_alpha_warning")->setVisible(true);
-
-		mEmptyAlphaCheck->setCommitCallback(boost::bind(&LLFloaterImagePreview::emptyAlphaCheckboxCallback, this));
-		mEmptyAlphaCheck->setValue(true);
-	}
-	else
-	{
-		getChild<LLUICtrl>("image_alpha_warning")->setVisible(false);
-		mEmptyAlphaCheck->setValue(false);
-	}
-	// </FS:Zi>
 	return TRUE;
 }
 
 // <FS:Zi> detect and strip empty alpha layers from images on upload
 void LLFloaterImagePreview::emptyAlphaCheckboxCallback()
 {
-	if (!mEmptyAlphaCheck->getValue())
+	if (mEmptyAlphaCheck->getValue())
+	{
+		getChild<LLUICtrl>("uploaded_size_text")->setTextArg("[ALPHA]", getString("no_alpha"));
+	}
+	else
 	{
 		LLNotificationsUtil::add("ImageEmptyAlphaLayer", LLSD(), LLSD(), boost::bind(&LLFloaterImagePreview::imageEmptyAlphaCallback, this, _1, _2));
 	}
@@ -232,6 +261,7 @@ bool LLFloaterImagePreview::imageEmptyAlphaCallback(const LLSD& notification, co
 		mEmptyAlphaCheck->setValue(true);
 	}
 
+	getChild<LLUICtrl>("uploaded_size_text")->setTextArg("[ALPHA]", getString(option == 0 ? "no_alpha" : "with_alpha"));
 	return true;
 }
 
@@ -407,24 +437,27 @@ void LLFloaterImagePreview::draw()
 			//	gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
 			//}
 			//gGL.end();
+			// </FS:Ansariel>
+
+			// <FS:Zi> Make preview area position to be not hard-coded
 			gGL.begin( LLRender::TRIANGLES );
 			{
 				gGL.texCoord2f(mPreviewImageRect.mLeft, mPreviewImageRect.mTop);
-				gGL.vertex2i(PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
+				gGL.vertex2i(mPreviewRect.mLeft, mPreviewRect.mTop);
 				gGL.texCoord2f(mPreviewImageRect.mLeft, mPreviewImageRect.mBottom);
-				gGL.vertex2i(PREVIEW_HPAD, PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+				gGL.vertex2i(mPreviewRect.mLeft, mPreviewRect.mBottom);
 				gGL.texCoord2f(mPreviewImageRect.mRight, mPreviewImageRect.mBottom);
-				gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+				gGL.vertex2i(mPreviewRect.mRight, mPreviewRect.mBottom);
 
 				gGL.texCoord2f(mPreviewImageRect.mLeft, mPreviewImageRect.mTop);
-				gGL.vertex2i(PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
+				gGL.vertex2i(mPreviewRect.mLeft, mPreviewRect.mTop);
 				gGL.texCoord2f(mPreviewImageRect.mRight, mPreviewImageRect.mBottom);
-				gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+				gGL.vertex2i(mPreviewRect.mRight, mPreviewRect.mBottom);
 				gGL.texCoord2f(mPreviewImageRect.mRight, mPreviewImageRect.mTop);
-				gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
+				gGL.vertex2i(mPreviewRect.mRight, mPreviewRect.mTop);
 			}
 			gGL.end();
-			// </FS:Ansariel>
+			// </FS:Zi>
 
 			gGL.getTexUnit(0)->unbind(LLTexUnit::TT_TEXTURE);
 
@@ -458,24 +491,27 @@ void LLFloaterImagePreview::draw()
 				//	gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
 				//}
 				//gGL.end();
+				// </FS:Ansariel>
+
+				// <FS:Zi> Make preview area position to be not hard-coded
 				gGL.begin( LLRender::TRIANGLES );
 				{
 					gGL.texCoord2f(0.f, 1.f);
-					gGL.vertex2i(PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
+					gGL.vertex2i(mPreviewRect.mLeft, mPreviewRect.mTop);
 					gGL.texCoord2f(0.f, 0.f);
-					gGL.vertex2i(PREVIEW_HPAD, PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+					gGL.vertex2i(mPreviewRect.mLeft, mPreviewRect.mBottom);
 					gGL.texCoord2f(1.f, 0.f);
-					gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
+					gGL.vertex2i(mPreviewRect.mRight, mPreviewRect.mBottom);
 
-					gGL.texCoord2f(1.f, 0.f);
-					gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_HPAD + PREF_BUTTON_HEIGHT + PREVIEW_HPAD);
 					gGL.texCoord2f(0.f, 1.f);
-					gGL.vertex2i(PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
+					gGL.vertex2i(mPreviewRect.mLeft, mPreviewRect.mTop);
+					gGL.texCoord2f(1.f, 0.f);
+					gGL.vertex2i(mPreviewRect.mRight, mPreviewRect.mBottom);
 					gGL.texCoord2f(1.f, 1.f);
-					gGL.vertex2i(r.getWidth() - PREVIEW_HPAD, PREVIEW_TEXTURE_HEIGHT + PREVIEW_VPAD);
+					gGL.vertex2i(mPreviewRect.mRight, mPreviewRect.mTop);
 				}
 				gGL.end();
-				// </FS:Ansariel>
+				// </FS:Zi>
 
 				gGL.getTexUnit(0)->unbind(LLTexUnit::TT_TEXTURE);
 			}

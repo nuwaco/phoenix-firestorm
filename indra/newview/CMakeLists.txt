@@ -365,8 +365,8 @@ set(viewer_SOURCE_FILES
     llfloaterpathfindinglinksets.cpp
     llfloaterpathfindingobjects.cpp
     llfloaterpay.cpp
-    # llfloaterperformance.cpp <FS:Beq/> replaced with fs version due to large changes and likelihood that LL version will not release.
-    fsfloaterperformance.cpp 
+    # llfloaterperformance.cpp
+    fsfloaterperformance.cpp # <FS:Beq> restore fs perf floater
     llfloaterperms.cpp
     llfloaterpostprocess.cpp
     llfloaterprofile.cpp
@@ -1622,6 +1622,9 @@ set(viewer_HEADER_FILES
     NACLfloaterexploresounds.h
     )
 
+  list(APPEND viewer_SOURCE_FILES llperfstats.cpp)
+  list(APPEND viewer_HEADER_FILES llperfstats.h)
+
 # <FS:Ansariel> Flickr / Discord keys and fsversionvalues headers are generated in here
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
 
@@ -1655,10 +1658,6 @@ configure_file(
 list(APPEND viewer_HEADER_FILES ${CMAKE_CURRENT_BINARY_DIR}/fsversionvalues.h)
 # </FS:TS>
 
-  # <FS:Beq> Performance stast support
-  list(APPEND viewer_SOURCE_FILES fsperfstats.cpp)
-  list(APPEND viewer_HEADER_FILES fsperfstats.h)
-  # </FS:Beq> 
 source_group("CMake Rules" FILES ViewerInstall.cmake)
 
 #build_data.json creation moved to viewer_manifest.py MAINT-6413
@@ -2169,7 +2168,7 @@ if (WINDOWS)
       ${CMAKE_CURRENT_SOURCE_DIR}/featuretable.txt
       ${viewer_APPSETTINGS_FILES}
       ${ARCH_PREBUILT_DIRS_RELEASE}/growl.dll
-      ${SHARED_LIB_STAGING_DIR}/Release/glod.dll # <FS:Beq> Restore GLOD build dependencies
+      ${SHARED_LIB_STAGING_DIR}/glod.dll # <FS:Beq> Restore GLOD build dependencies
       SLPlugin
       media_plugin_cef
       media_plugin_libvlc
@@ -2179,7 +2178,7 @@ if (WINDOWS)
     # <FS:Ansariel> Only copy OpenJPEG dll if needed
     if (NOT USE_KDU)
         list(APPEND COPY_INPUT_DEPENDENCIES
-            ${SHARED_LIB_STAGING_DIR}/Release/openjp2.dll
+            ${SHARED_LIB_STAGING_DIR}/openjp2.dll
             )
     endif (NOT USE_KDU)
     # </FS:Ansariel>
@@ -2381,14 +2380,12 @@ target_link_libraries(${VIEWER_BINARY_NAME}
         ll::bugsplat
         ll::tracy
         fs::glod # <FS:Beq/> restore GLOD dependencies
-        # fs::growl # <FS:Ansariel> Growl support <FS:Zi> added further down for win/mac only
+        fs::discord # <FS:Ansariel> Discord  support
         )
 
 if( TARGET ll::intel_memops )
    target_link_libraries(${VIEWER_BINARY_NAME} ll::intel_memops )
 endif()
-
-target_link_libraries(${VIEWER_BINARY_NAME} ${DISCORD_LIBRARY} )
 
 if (USE_BUGSPLAT)
   target_link_libraries(${VIEWER_BINARY_NAME}
@@ -2396,12 +2393,11 @@ if (USE_BUGSPLAT)
     )
 endif (USE_BUGSPLAT)
 
-if (WINDOWS)
-    target_link_libraries(${VIEWER_BINARY_NAME}
-    fs::growl # <FS:Ansariel> Growl support
-    ${GROWL_LIBRARY}
-    )
-endif (WINDOWS)
+# <FS:Ansariel> Growl support
+if (WINDOWS OR DARWIN)
+    target_link_libraries(${VIEWER_BINARY_NAME} fs::growl)
+endif (WINDOWS OR DARWIN)
+# </FS:Ansariel>
 
 if( TARGET ll::nvapi )
    target_link_libraries(${VIEWER_BINARY_NAME} ll::nvapi )

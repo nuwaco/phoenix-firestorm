@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
-<llsd>
-<map>
+<llsd><map>
     <key>installables</key>
     <map>
       <key>SDL2</key>
@@ -106,9 +105,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>88b6b9ebc2eda992b721529921c82066</string>
+              <string>80d157facdba399b3a59c400e29cb625</string>
               <key>url</key>
-              <string>http://3p.firestormviewer.org/glib-2.56.0.220911433-linux64_bionic-220911433.tar.bz2</string>
+              <string>http://3p.firestormviewer.org/glib-2.64.6.230870115-linux64-230870115.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -552,9 +551,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>45acdda717f95ce9169de9f49199c066</string>
+              <string>1c341bdbb5fd0c8a8930f76e6c1647d4</string>
               <key>url</key>
-              <string>http://3p.firestormviewer.org/apr_suite-1.4.5.230351228-linux64-230351228.tar.bz2</string>
+              <string>http://3p.firestormviewer.org/apr_suite-1.4.5.230921251-linux64-230921251.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -672,9 +671,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>7b4aceaed511d44c4d1354b2162b59c7</string>
+              <string>02b569ac2bd71f201e3dd86ade7b3eeb</string>
               <key>url</key>
-              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/107398/936936/bugsplat-1.0.7.576560-darwin64-576560.tar.bz2</string>
+              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/113876/983684/bugsplat-1.0.7.579696-darwin64-579696.tar.bz2</string>
             </map>
             <key>name</key>
             <string>darwin64</string>
@@ -684,9 +683,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>53918c7c74b943cdc0bb90caf9657a84</string>
+              <string>5b32c47ae8e8cf0d4106f08e8db18044</string>
               <key>url</key>
-              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/107400/936949/bugsplat-4.0.3.0.576560-windows-576560.tar.bz2</string>
+              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/113878/983697/bugsplat-4.0.3.0.579696-windows-579696.tar.bz2</string>
             </map>
             <key>name</key>
             <string>windows</string>
@@ -696,16 +695,16 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>19d6a55db101f02e7eb531daf3e8cfd1</string>
+              <string>79c005fd8a660f8551b3c9ede64fa4ef</string>
               <key>url</key>
-              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/107401/936948/bugsplat-.576560-windows64-576560.tar.bz2</string>
+              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/113879/983696/bugsplat-4.0.3.0.579696-windows64-579696.tar.bz2</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
         <key>version</key>
-        <string>4.0.3.0.576560</string>
+        <string>4.0.3.0.579696</string>
       </map>
       <key>colladadom</key>
       <map>
@@ -736,9 +735,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>30b1a9b7637f7a1546d38430064ca582</string>
+              <string>8b79711b4fa914c16f1284939d55dcc1</string>
               <key>url</key>
-              <string>https://3p.firestormviewer.org/colladadom-2.3.222261253-linux64-222261253.tar.bz2</string>
+              <string>https://3p.firestormviewer.org/colladadom-2.3.230940029-linux64-230940029.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -783,18 +782,6 @@
         <string>cubemaptoequirectangular</string>
         <key>platforms</key>
         <map>
-          <key>linux64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>eb62a7040c7579569e06e5a61a7831d5</string>
-              <key>url</key>
-              <string>http://3p.firestormviewer.org/cubemaptoequirectangular-1.1.0-linux64-213500938.tar.bz2</string>
-            </map>
-            <key>name</key>
-            <string>darwin64</string>
-          </map>
           <key>darwin64</key>
           <map>
             <key>archive</key>
@@ -806,6 +793,18 @@
             </map>
             <key>name</key>
             <string>darwin64</string>
+          </map>
+          <key>linux64</key>
+          <map>
+            <key>archive</key>
+            <map>
+              <key>hash</key>
+              <string>eb62a7040c7579569e06e5a61a7831d5</string>
+              <key>url</key>
+              <string>http://3p.firestormviewer.org/cubemaptoequirectangular-1.1.0-linux64-213500938.tar.bz2</string>
+            </map>
+            <key>name</key>
+            <string>linux64</string>
           </map>
           <key>windows</key>
           <map>
@@ -959,6 +958,18 @@
             <key>name</key>
             <string>darwin64</string>
           </map>
+          <key>linux64</key>
+          <map>
+            <key>archive</key>
+            <map>
+              <key>hash</key>
+              <string>ad7b9fc10184e8145731f45ae400bfd1</string>
+              <key>url</key>
+              <string>http://3p.firestormviewer.org/dullahan-1.12.2.202210012157_92.0.27_g274abcf_chromium-92.0.4515.159-linux64-222741156.tar.bz2</string>
+            </map>
+            <key>name</key>
+            <string>linux64</string>
+          </map>
           <key>windows</key>
           <map>
             <key>archive</key>
@@ -982,18 +993,6 @@
             </map>
             <key>name</key>
             <string>windows64</string>
-          </map>
-          <key>linux64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>ad7b9fc10184e8145731f45ae400bfd1</string>
-              <key>url</key>
-              <string>http://3p.firestormviewer.org/dullahan-1.12.2.202210012157_92.0.27_g274abcf_chromium-92.0.4515.159-linux64-222741156.tar.bz2</string>
-            </map>
-            <key>name</key>
-            <string>linux64</string>
           </map>
         </map>
         <key>version</key>
@@ -1030,9 +1029,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>bbcfe77b920fb7f00c7f2a494ffc6c43</string>
+              <string>39702f98867a319b090ee04f22d82762</string>
               <key>url</key>
-              <string>http://3p.firestormviewer.org/expat-2.1.1.180841547-linux64-180841547.tar.bz2</string>
+              <string>http://3p.firestormviewer.org/expat-2.5.0.230021327-linux64-230021327.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -1079,19 +1078,19 @@
         <string>fmodstudio</string>
         <key>platforms</key>
         <map>
-          <key>darwin</key>
+          <key>darwin64</key>
           <map>
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>fec86a4837ae9c6932c10af11851c4d0</string>
+              <string>eebbcd0757dd28646ebb4505e7af140e</string>
               <key>hash_algorithm</key>
               <string>md5</string>
               <key>url</key>
-              <string>file:///opt/firestorm/fmodstudio-2.02.09-darwin64-5.tar.bz2</string>
+              <string>file:///opt/firestorm/fmodstudio-2.02.13-darwin64-6.tar.bz2</string>
             </map>
             <key>name</key>
-            <string>darwin</string>
+            <string>darwin64</string>
           </map>
           <key>linux64</key>
           <map>
@@ -1503,18 +1502,6 @@
         <string>jpegencoderbasic</string>
         <key>platforms</key>
         <map>
-          <key>linux64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>fd8060aa3c920e0fc63e7ecbea67bc5e</string>
-              <key>url</key>
-              <string>http://3p.firestormviewer.org/jpegencoderbasic-1.0-linux64-213500937.tar.bz2</string>
-            </map>
-            <key>name</key>
-            <string>darwin64</string>
-          </map>
           <key>darwin64</key>
           <map>
             <key>archive</key>
@@ -1526,6 +1513,18 @@
             </map>
             <key>name</key>
             <string>darwin64</string>
+          </map>
+          <key>linux64</key>
+          <map>
+            <key>archive</key>
+            <map>
+              <key>hash</key>
+              <string>fd8060aa3c920e0fc63e7ecbea67bc5e</string>
+              <key>url</key>
+              <string>http://3p.firestormviewer.org/jpegencoderbasic-1.0-linux64-213500937.tar.bz2</string>
+            </map>
+            <key>name</key>
+            <string>linux64</string>
           </map>
           <key>windows</key>
           <map>
@@ -2000,9 +1999,9 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>c68bbfe6c9bd59d182c4d20d966492b4</string>
+              <string>d72c6d8db827ce3d83c5703f519a2ac9</string>
               <key>url</key>
-              <string>http://3p.firestormviewer.org/libxml2-2.9.4.222130358-linux64-222130358.tar.bz2</string>
+              <string>http://3p.firestormviewer.org/libxml2-2.10.3.230940019-linux64-230940019.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -2965,18 +2964,6 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
         <string>threejs</string>
         <key>platforms</key>
         <map>
-          <key>linux64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>d37be064bd851276dab423d723cb9b7d</string>
-              <key>url</key>
-              <string>http://3p.firestormviewer.org/threejs-0.132.2-linux64-213500940.tar.bz2</string>
-            </map>
-            <key>name</key>
-            <string>linux64</string>
-          </map>
           <key>darwin64</key>
           <map>
             <key>archive</key>
@@ -2988,6 +2975,18 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
             </map>
             <key>name</key>
             <string>darwin64</string>
+          </map>
+          <key>linux64</key>
+          <map>
+            <key>archive</key>
+            <map>
+              <key>hash</key>
+              <string>d37be064bd851276dab423d723cb9b7d</string>
+              <key>url</key>
+              <string>http://3p.firestormviewer.org/threejs-0.132.2-linux64-213500940.tar.bz2</string>
+            </map>
+            <key>name</key>
+            <string>linux64</string>
           </map>
           <key>windows</key>
           <map>
@@ -3012,16 +3011,6 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
             </map>
             <key>name</key>
             <string>windows64</string>
-          </map>
-          <key>linux64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>46edf0f55417f8ef0d33a5c007bc3644</string>
-              <key>url</key>
-              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/89310/815451/threejs-0.132.2-windows64-564843.tar.bz2</string>
-            </map>
           </map>
         </map>
         <key>version</key>
@@ -3328,9 +3317,9 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>f810193590cae9b35a1c77b6c72bfb01</string>
+              <string>71a9c7c03a2c26cdb21fa476de485d9c</string>
               <key>url</key>
-              <string>http://3p.firestormviewer.org/xmlrpc_epi-0.54.1.180841935-linux64-180841935.tar.bz2</string>
+              <string>http://3p.firestormviewer.org/xmlrpc_epi-0.54.2.230940042-linux64-230940042.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -3362,6 +3351,36 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
         </map>
         <key>version</key>
         <string>0.54.1.555529</string>
+      </map>
+      <key>xxhash</key>
+      <map>
+        <key>copyright</key>
+        <string>Copyright 2012-2020 Yann Collet</string>
+        <key>description</key>
+        <string>xxHash Extremely fast hash algorithm</string>
+        <key>license</key>
+        <string>bsd</string>
+        <key>license_file</key>
+        <string>LICENSES/xxhash.txt</string>
+        <key>name</key>
+        <string>xxhash</string>
+        <key>platforms</key>
+        <map>
+          <key>common</key>
+          <map>
+            <key>archive</key>
+            <map>
+              <key>hash</key>
+              <string>e4f77ba0a9b8ec3cc3fabc51c4da81d2</string>
+              <key>url</key>
+              <string>https://automated-builds-secondlife-com.s3.amazonaws.com/ct2/110070/956941/xxhash-0.8.1.578006-windows-578006.tar.bz2</string>
+            </map>
+            <key>name</key>
+            <string>common</string>
+          </map>
+        </map>
+        <key>version</key>
+        <string>0.8.1</string>
       </map>
       <key>zlib-ng</key>
       <map>
@@ -3454,12 +3473,11 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
           <map>
             <key>RelWithDebInfo</key>
             <map>
+              <key>build</key>
+              <map>
+              </map>
               <key>configure</key>
               <map>
-                <key>arguments</key>
-                <array>
-                  <string>../indra</string>
-                </array>
                 <key>command</key>
                 <string>cmake</string>
                 <key>options</key>
@@ -3496,12 +3514,11 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
             </map>
             <key>Release</key>
             <map>
+              <key>build</key>
+              <map>
+              </map>
               <key>configure</key>
               <map>
-                <key>arguments</key>
-                <array>
-                  <string>../indra</string>
-                </array>
                 <key>command</key>
                 <string>cmake</string>
                 <key>options</key>
@@ -3535,25 +3552,6 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
               </map>
               <key>name</key>
               <string>ReleaseOS</string>
-            </map>
-            <key>Doxygen</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>arguments</key>
-                <array>
-                  <string>doxygen/Doxyfile</string>
-                </array>
-                <key>command</key>
-                <string>doxygen</string>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>command</key>
-                <string>cmake</string>
-              </map>
-              <key>name</key>
-              <string>Doxygen</string>
             </map>
             <key>ReleaseFS</key>
             <map>
@@ -3741,140 +3739,12 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
           <key>name</key>
           <string>common</string>
         </map>
-        <key>linux64</key>
-        <map>
-          <key>build_directory</key>
-          <string>build-linux-x86_64</string>
-          <key>configurations</key>
-          <map>
-            <key>Release</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>command</key>
-                <string>ninja</string>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>arguments</key>
-                <array>
-                  <string>../indra</string>
-                </array>
-                <key>options</key>
-                <array>
-                  <string>-G</string>
-                  <string>Ninja</string>
-                  <string>-DLL_TESTS=Off</string>
-                </array>
-              </map>
-              <key>default</key>
-              <string>True</string>
-              <key>name</key>
-              <string>Release</string>
-            </map>
-            <key>ReleaseOS</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>command</key>
-                <string>ninja</string>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>-G</string>
-                  <string>Ninja</string>
-                  <string>-DLL_TESTS=Off</string>
-                </array>
-              </map>
-              <key>name</key>
-              <string>ReleaseOS</string>
-            </map>
-            <key>default</key>
-            <map>
-              <key>build</key>
-              <map>
-              </map>
-              <key>name</key>
-              <string>default</string>
-            </map>
-            <key>ReleaseFS</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>--build</string>
-                  <string>--platform linux</string>
-                </array>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>--kdu</string>
-                  <string>--fmodstudio</string>
-                  <string>--platform linux</string>
-                </array>
-              </map>
-              <key>name</key>
-              <string>ReleaseFS</string>
-            </map>
-            <key>ReleaseFS_open</key>
-              <map>
-                <key>build</key>
-                <map>
-                  <key>options</key>
-                  <array>
-                    <string>--build</string>
-                    <string>--platform linux</string>
-                    <string>--package</string>
-                  </array>
-                </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>--platform linux</string>
-                  <string>--package</string>
-                </array>
-              </map>
-              <key>name</key>
-              <string>ReleaseFS_open</string>
-            </map>
-          </map>
-          <key>name</key>
-          <string>linux64</string>
-        </map>
         <key>darwin64</key>
         <map>
           <key>build_directory</key>
           <string>build-darwin-x86_64</string>
           <key>configurations</key>
           <map>
-            <key>Doxygen</key>
-            <map>
-              <key>build</key>
-              <map>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>-DCMAKE_BUILD_TYPE:STRING=Release</string>
-                  <string>-DWORD_SIZE:STRING=32</string>
-                  <string>-DROOT_PROJECT_NAME:STRING=SecondLife</string>
-                  <string>-DINSTALL_PROPRIETARY=TRUE</string>
-                </array>
-                <key>arguments</key>
-                <array>
-                  <string>../indra</string>
-                </array>
-              </map>
-              <key>name</key>
-              <string>Doxygen</string>
-            </map>
             <key>RelWithDebInfo</key>
             <map>
               <key>build</key>
@@ -3891,12 +3761,20 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
               </map>
               <key>configure</key>
               <map>
+                <key>arguments</key>
+                <array>
+                  <string>../indra</string>
+                </array>
                 <key>options</key>
                 <array>
                   <string>-G</string>
                   <string>Xcode</string>
                 </array>
               </map>
+              <!-- FS:Ansariel: This will cause packages being installed twice
+              <key>default</key>
+              <string>True</string>
+              -->
               <key>name</key>
               <string>RelWithDebInfo</string>
             </map>
@@ -3941,6 +3819,10 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
               </map>
               <key>configure</key>
               <map>
+                <key>arguments</key>
+                <array>
+                  <string>../indra</string>
+                </array>
                 <key>options</key>
                 <array>
                   <string>-G</string>
@@ -3966,6 +3848,10 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
               </map>
               <key>configure</key>
               <map>
+                <key>arguments</key>
+                <array>
+                  <string>../indra</string>
+                </array>
                 <key>options</key>
                 <array>
                   <string>-G</string>
@@ -4065,27 +3951,22 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
               <key>name</key>
               <string>ReleaseFS_open</string>
             </map>
-         </map>
+          </map>
           <key>name</key>
           <string>darwin64</string>
         </map>
-        <key>linux</key>
+        <key>linux64</key>
         <map>
           <key>build_directory</key>
-          <string>build-linux-$AUTOBUILD_CONFIGURE_ARCH</string>
+          <string>build-linux-x86_64</string>
           <key>configurations</key>
           <map>
-            <key>Doxygen</key>
+            <key>Release</key>
             <map>
               <key>build</key>
               <map>
                 <key>command</key>
-                <string>make</string>
-                <key>options</key>
-                <array>
-                  <string>-j</string>
-                  <string>12</string>
-                </array>
+                <string>ninja</string>
               </map>
               <key>configure</key>
               <map>
@@ -4096,77 +3977,14 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
                 <key>options</key>
                 <array>
                   <string>-G</string>
-                  <string>Unix Makefiles</string>
+                  <string>Ninja</string>
+                  <string>-DLL_TESTS=Off</string>
                 </array>
               </map>
-              <key>name</key>
-              <string>Doxygen</string>
-            </map>
-            <key>RelWithDebInfo</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>command</key>
-                <string>make</string>
-                <key>options</key>
-                <array>
-                  <string>-j 12</string>
-                </array>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>-G</string>
-                  <string>Unix Makefiles</string>
-                </array>
-              </map>
-              <key>name</key>
-              <string>RelWithDebInfo</string>
-            </map>
-            <key>RelWithDebInfoOS</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>command</key>
-                <string>make</string>
-                <key>options</key>
-                <array>
-                  <string>-j</string>
-                  <string>7</string>
-                </array>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>-G</string>
-                  <string>Unix Makefiles</string>
-                </array>
-              </map>
-              <key>name</key>
-              <string>RelWithDebInfoOS</string>
-            </map>
-            <key>Release</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>command</key>
-                <string>make</string>
-                <key>options</key>
-                <array>
-                  <string>-j</string>
-                  <string>12</string>
-                </array>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>options</key>
-                <array>
-                  <string>-G</string>
-                  <string>Unix Makefiles</string>
-                </array>
-              </map>
+              <!-- FS:Ansariel: This will cause packages being installed twice
+              <key>default</key>
+              <string>True</string>
+              -->
               <key>name</key>
               <string>Release</string>
             </map>
@@ -4175,19 +3993,15 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
               <key>build</key>
               <map>
                 <key>command</key>
-                <string>make</string>
-                <key>options</key>
-                <array>
-                  <string>-j</string>
-                  <string>7</string>
-                </array>
+                <string>ninja</string>
               </map>
               <key>configure</key>
               <map>
                 <key>options</key>
                 <array>
                   <string>-G</string>
-                  <string>Unix Makefiles</string>
+                  <string>Ninja</string>
+                  <string>-DLL_TESTS=Off</string>
                 </array>
               </map>
               <key>name</key>
@@ -4293,7 +4107,7 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
             </map>
           </map>
           <key>name</key>
-          <string>linux</string>
+          <string>linux64</string>
         </map>
         <key>windows</key>
         <map>
@@ -4331,6 +4145,10 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
                   <string>${AUTOBUILD_WIN_VSPLATFORM|NOTWIN}</string>
                 </array>
               </map>
+              <!-- FS:Ansariel: This will cause packages being installed twice
+              <key>default</key>
+              <string>True</string>
+              -->
               <key>name</key>
               <string>RelWithDebInfo</string>
             </map>
@@ -4343,7 +4161,7 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
                   <string>SecondLife.sln</string>
                 </array>
                 <key>command</key>
-                <string>devenv</string>
+                <string>msbuild.exe</string>
                 <key>options</key>
                 <array>
                   <string>/p:Configuration=RelWithDebInfo</string>
@@ -4417,7 +4235,7 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
                   <string>SecondLife.sln</string>
                 </array>
                 <key>command</key>
-                <string>devenv</string>
+                <string>msbuild.exe</string>
                 <key>options</key>
                 <array>
                   <string>/p:Configuration=Release</string>
@@ -4608,5 +4426,4 @@ Copyright (c) 2012, 2014, 2015, 2016 nghttp2 contributors</string>
     <string>autobuild</string>
     <key>version</key>
     <string>1.3</string>
-  </map>
-</llsd>
+  </map></llsd>
